@@ -1,0 +1,996 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  
+}
+
+body {
+  background-color: #f8f8f8;
+  margin: 0;
+  display: flex;
+  font-family: 'Inter', sans-serif;
+}
+/* Left Sidebar */
+.sidebar {
+  position: relative;
+  overflow: hidden;
+  z-index: 5000;
+  position: fixed;
+  margin-left: 15px;
+  margin-top: 12px;
+  border-radius: 20px;
+  width: 350px;
+  height: 97%;
+  background: linear-gradient(90deg, #00F0FF 0%, #00FFE0 89.5%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar.active {
+  transform: translateX(-100%);
+}
+
+.sidebar .sidebar-title {
+  margin: 25px 25px 12px 25px;
+  color: #000;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+}
+
+.sidebar h2 {
+  font-size: 25px;
+  margin-left: 10px;
+}
+
+.sidebar input {
+  margin: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 11px solid black;
+  outline-width: 0.5px;
+  outline-style:dotted;
+  outline-color: black;
+}
+/* Design paras search bar */
+.searchBar:hover input {
+  outline-style: solid;
+}
+.searchBar {
+  background: #00F0FF;
+  overflow: hidden;
+  padding-bottom: 40px;
+  border-bottom: 5px solid rgb(255, 255, 255);
+}
+.searchBar:hover button{
+  background-color: #000;
+}
+/* END */
+
+.sidebar button {
+  margin-right: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+div .addTitle {
+  background-color: #2e2e2e; 
+  border: none;
+  color: white;
+  font-weight: 700;
+}
+
+::-webkit-scrollbar {
+  left: -0%;
+  position: absolute;
+  width: 0;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #46505700;
+  
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.sidebar .title-list {
+  text-align: right;
+  font-weight: 500;
+  word-wrap: break-word;
+  word-spacing: normal;
+  height: 390px;
+  margin-top: 1.89rem;
+  overflow-y: scroll;
+  width: 100%;
+  }
+
+
+.sidebar .title-list div {
+  font-weight: 400;
+  box-shadow: 0px 0px 1px 4px rgba(50, 10, 87, 0.);
+  cursor: pointer;
+  padding-left: 25px;
+  border: 1px solid none;
+  color: #000;
+  text-align: justify;
+}
+
+/* Design sa pag input ug Title */
+.input-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-container input {
+  padding: 10px;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-label {
+  padding: 4px 4px 2px 4px;
+  margin-left: -3px;
+  background-color: #00F0FF;
+  border-radius: 20px;
+  position: absolute;
+  left: 25px;
+  top: 13%;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 16px;
+  pointer-events: none;
+  transition: top 0.3s, font-size 0.3s, color 0.3s;
+}
+
+.input-field:focus,
+.input-field:valid {
+  border-color: #00F0FF;
+  box-shadow: 0 0 5pxrgba(0, 240, 255, 1); 
+}
+
+.input-field:focus + .input-label,
+.input-field:valid + .input-label {
+  top: 10px;
+  font-size: 12px;
+  color: black;
+}
+
+.input-container input:focus{
+  outline: 1px solid black;
+  box-shadow: 0 0 10px rgba(0, 0, 255, 0.286); 
+
+}
+
+.input-field:placeholder-shown + .input-label {
+  top: 50.5%;
+  transform: translateY(-50%);
+  font-size: 16px;
+}
+
+@keyframes resizeText {
+  0%, 100% {
+    font-size: 10px; 
+  }
+  50% {
+    font-size: 10.4px; 
+  }
+}
+/* THE END sa design sa input */
+
+/* Mag Delete ug Title */
+.delete-btn {
+  display: none;
+  position: absolute; 
+  top: 50%; 
+  transform: translateY(-50%);
+  font-weight: 700;
+  font-size: 8px; 
+  right: 10px; 
+  transition: transform 0.3s ease; 
+}
+
+.active-title button {
+  background-color: red;
+  border-radius: 20px;
+  color: #f8f8f8;
+
+}
+/*END sa pag Delete ug Title */
+
+/* Base styles for title list and deleteAllTitles Button */
+#titleListDiv .deleteAllTitles{
+  z-index: 2000;  
+  position: absolute;
+  bottom: 1.5%;
+  right: -17%;
+  font-weight: 600;
+  width: 102px; 
+  white-space: nowrap;
+  text-align: center;
+  background-color: #F44336;
+  cursor: pointer;
+  transition: width 0.4s ease; 
+  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 10% 50%);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  opacity: 0.9  ;
+}
+
+/* Hover styles for title list and deleteAllTitles Button */
+#titleListDiv .deleteAllTitles:hover {
+  background-color: #F44336;
+  color: rgb(255, 255, 255);
+  opacity: 1;
+  width: 230px; 
+}
+
+#titleListDiv .deleteAllTitles::before {
+  content: "Delete All Titles";
+  opacity: 0;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  transform: translateX(100%);
+}
+
+#titleListDiv .deleteAllTitles:hover::before {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+#titleListDiv .deleteAllTitles:hover span {
+  color: rgba(0, 0, 0, 0);
+  transition: color 0.3s ease-in; 
+}
+
+.deleteAllTitles span {
+  position: absolute;
+  font-weight: bolder;
+  top: 27%; 
+  left: 28%; 
+  color: white; 
+  transition: left 0.3s ease;
+}
+
+.title-list .active-title {
+  max-height: 60px;
+  line-height: 60px;
+  overflow: hidden;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  margin: 5px 0 5px 400px;
+  background-color: #f8f8f8;
+  font-size: 20px;
+  animation: slide-in 0.5s forwards; 
+}
+
+.title-list .active-title p {
+  max-width: 200px;
+  font-weight: 800;
+}
+
+@keyframes slide-in {
+  from {
+    margin-left: 400px;
+  }
+  to {
+    margin-left: 30px;
+  }
+}
+
+.title-list .active-title button {
+  display: block; 
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(100%) translateY(-15px); 
+  transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
+}
+
+.title-list .active-title:hover button {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0) translateY(-15px);
+}
+
+.title-list .title-item {
+  position: relative;
+}
+
+.title-list .title-item:not(.active-title) {
+  color: #FFFFFF;
+  transition: color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+.title-list .title-item:not(.active-title) {
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  margin: 0 30px 10px 30px;
+  box-shadow: 0 0 0 rgba(0, 0, 0,0.1);
+  transition: transform 0.3s ease, padding-left 0.3s ease;
+  border-radius: 20px;
+  }
+
+.title-list .title-item:not(.active-title):hover {
+  transform: scale(1.05); 
+}
+
+/*ENDDD Hover styles for title list and deleteAllTitles Button */
+
+/* Left Sidebar */
+
+
+/* Main Content */
+.message-item {
+  text-align: center;
+  font-size: 2em;
+  position: absolute;
+  top: 40%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  padding: 10px;
+  z-index: 999;
+  font-weight: 600;
+}
+
+.container {
+  z-index: 20;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 5rem;
+  margin-left: 20rem;
+  margin-top: 12px;
+  border-radius: 20px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.container.sidebar-active {
+  margin-left: 400px;
+  z-index: 0;
+}
+
+.top {
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* List Title sa main page */
+#shoppingListTitle {
+  word-wrap: break-word;
+  font-size: 40px;
+  color: #000;
+  text-align: center;
+  margin-bottom: 10px;
+  max-width: 500px;
+}
+
+#listTitle {
+  max-width: 250px;
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+/* END*/
+
+/* Design sa itemName, Quantity,Unit ug ADD Item button */
+#itemName,
+#itemQuantity {
+  background: rgba(0, 255, 224, 1);
+  border: none;
+  padding: 10px;
+}
+
+#itemName {
+  flex: 1;
+  margin-right: 5px;
+  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+}
+
+#itemQuantity {
+  width: 100px; 
+  margin-right: 5px; 
+}
+
+#itemUnit {
+  width: 100px; 
+  margin-right: 5px; 
+    border: none;
+    border-top-right-radius: 1em;
+    padding: 9.5px 10px 10px 10px;
+    border-bottom-right-radius: 1em;
+    background: rgba(0, 255, 224, 1);
+}
+
+#itemUnit:hover, #itemName:hover, #itemQuantity:hover, .add-item-btn:hover {
+
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+}
+
+#adds-item-btn {
+  padding: 10px;
+  background-color: #2e2e2e;
+  color: white;
+  border: none;
+  border-radius: 1em;
+  cursor: pointer;
+
+}
+
+.add-item-btn:hover {
+  background-color: #1e1e2fc0;
+  cursor: pointer;
+
+}
+/* ENDDD*/
+
+
+/* Sulod sa FORM kung asa makita ang gipang ADD nga ItemName etc. */
+.item-form {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  flex-wrap: wrap; 
+  width: 90%; 
+  max-width: 500px; 
+  margin-bottom: 1rem; 
+}
+
+.checkBox {
+  margin-left: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.item-form,.item-filters {
+  display: flex;
+  flex-direction: row;
+}
+
+.item-form input:focus {
+  outline: 1px solid rgba(168, 33, 33, 0.205);
+}
+
+.item-list-container {
+  position: relative;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+  min-height: 450px;
+  color: #000;
+  width: 700px;
+}
+
+.design1 {
+  top: -21.5%;
+  left: -40px;
+  position: absolute;
+  width: 100px;
+}
+
+/* Delete TANAN Items nga Button */
+.deleteAllItems {
+  position: absolute;
+  border: none;
+  top: -3%;
+  right: -2%;
+  cursor: pointer;
+  background: none;
+  opacity: 1;
+        transition: opacity 0.3s ease-in-out;
+
+}
+
+.deleteAllItems img {
+  width: 30px;
+  height: 30px;
+}
+/* END */
+
+.labels:hover,
+.edit-btn:hover,
+.edit-name:hover,
+.edit-quantity:hover,
+.edit-quantity:hover,
+.remove-btn {
+  cursor: pointer;
+}
+
+.edit-btn:hover img,
+.remove-btn:hover img,
+.save-btn:hover img,
+.discard-btn:hover{
+  transform: scale(1.2);
+}
+
+/* DESIGN sa mga list sa Item */
+.labels {
+  margin-left: 5px;
+  font-weight: 400;
+  text-align: justify;
+  width: 580px;
+  overflow: hidden;
+  word-wrap: break-word;
+  border-radius: 2px;
+  padding: 2px 2px;
+}
+
+.item-list li {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 5px;
+  transition: background-color 0.15s ease;
+}
+
+.item-list li:first-child {
+  margin-top: 1.5rem;
+}
+
+
+.item-list li:not(.active-item):hover{
+  background-color: rgba(54, 62, 10, 0.016);
+}
+
+
+
+
+.item-list li:not(.active-item):hover button{
+  margin-right: 1px;
+}
+
+
+
+.item-list button {
+  display: none;
+}
+
+
+
+.item-list li.active-item {
+  background-color: rgb(0, 140, 135);
+}
+
+
+.item-list li.active-item .checkBox {
+  display: none;
+}
+
+.item-list li.active-item button {
+  display: block;
+}
+
+.item-list li.active-item input {
+  margin-left: 24px;
+  padding-left: 20px;
+}
+
+.item-list li.edit-mode button {
+  display: block;
+}
+
+
+.item-list li>*:nth-child(2) {
+  margin-right: auto;
+}
+/* End sa Item List */
+
+/* Diri ang pag Filters sa mga Items ug Sorting */
+.item-filters {
+  margin-bottom: 1.5rem;
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.item-filters button, #sortSelect {
+  font-weight: 500;
+  background-color: #dddddd71;
+  color: #2e2e2e;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  padding: 5px;
+  transition: font-size 0.3s ease-in-out;
+
+}
+
+.item-filters button:hover,
+.item-filters button.active {
+  background-color: #2e2e2e41;
+  color: #000;
+  font-size: 18px;
+}
+
+.completed {
+  text-decoration: line-through;
+  text-decoration-color: #000;
+  color: rgba(0, 0, 0, 0.4);
+}
+/*END Filtering Items and Sorting */
+
+/* Diri ang pag edit sa itemName,Quantity, ug Unit */
+.edit-name {
+  margin-left: 5px;
+  border: none;
+  font-weight: 600;
+  width: 480px;
+  background-color: whitesmoke;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 25px;
+}
+
+.edit-quantity {
+  background-color: whitesmoke;
+  border-radius: 20px;
+  border: none;
+  padding: 5px 10px;
+  width: 70px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.edit-unit {
+  background-color: whitesmoke;
+  border-radius: 20px;
+  border: none;
+  padding: 5px 10px;
+  width: 70px;
+  margin-right: 10px;
+}
+/* Common styles for buttons */
+.edit-btn img, 
+.remove-btn img, 
+.save-btn img, 
+.save-btn, 
+.edit-btn, 
+.remove-btn, 
+.discard-btn, 
+.discard-btn img {
+  width: 27px;
+  height: 27px;
+  border: none;
+  background: none;
+  transition: transform 0.3s ease;
+}
+
+/* Adjustments for save buttons */
+li .save-btn img,
+li .save-btn {
+  height: 30px;
+}
+
+/* Adjustments for active items */
+.active-item .edit-btn img {
+  height: 33px;
+  width: 30px;
+}
+
+
+/* Hover effect for non-active items */
+.item-list li:not(.active-item):hover button {
+  margin-right: 7px;
+  height: 23px;
+  display: block;
+}
+
+
+/* ENDD sa pag edit sa itemName,Quantity, ug Unit */
+
+/* Icon para mo show sa sidebar gamay ang screen */
+.hidden {
+  display: none;
+}
+
+.burger {
+  z-index: 200;
+  left: 30px;
+  top: 20px;
+  width: 40px; 
+  height: 32px; 
+  position: relative;
+  display:none;
+}
+
+.burger img {
+  z-index: 300;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.burger img:hover {
+  box-shadow: 1px 1px 0.1px rgba(0, 0, 0, 0.1);
+}
+/* ENDDD para pa show sa sidebar  */
+
+
+/* FOR RESPONSIVENESS */
+@media (max-width: 1290px ) {
+
+  .message-item {
+    text-align: center;
+    font-size: 2em;
+    position: absolute;
+    top: 40%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    padding: 10px;
+    z-index: 999;
+    font-weight: 600;
+  }
+
+  .edit-name {
+    padding-left: 5px;
+    max-width: 215px;
+    text-align: start;
+    height: 25px;
+  }
+
+  .edit-quantity, .edit-unit {
+    font-weight: 700;
+  }
+  .sidebar {
+    transform: translateX(-100%);
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 95%;
+    z-index: 1000;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* #itemName,
+  #itemQuantity,
+  #itemUnit {
+    width: calc(100% - 20px); 
+    margin-bottom: 10px; 
+    border-radius: 10px;
+  } */
+
+  .edit-unit {
+    width: 60px;
+  }
+
+  .item-form {
+    width: 90%; 
+    max-width: 500px;
+    font-size: 1.4em; 
+    text-align: center; 
+  }
+
+  .item-list-container {
+    width: 90%;
+    max-width: 800px;
+    text-align: center; 
+  }
+
+  /* #adds-item-btn {
+    width: calc(40% - 20px); 
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block; 
+  } */
+
+  .burger {
+    display: block;
+  }
+
+  .container.sidebar-active {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 1000px ) {
+
+  .message-item {
+    text-align: center;
+    font-size: 2em;
+    position: absolute;
+    top: 40%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    padding: 10px;
+    z-index: 999;
+    font-weight: 600;
+  }
+
+  .edit-name {
+    padding-left: 5px;
+    max-width: 215px;
+    text-align: start;
+    height: 25px;
+  }
+
+  .edit-quantity, .edit-unit {
+    font-weight: 700;
+  }
+  .sidebar {
+    transform: translateX(-100%);
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 95%;
+    z-index: 1000;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #itemName,
+  #itemQuantity,
+  #itemUnit {
+    width: calc(100% - 20px); 
+    margin-bottom: 10px; 
+    border-radius: 10px;
+  }
+
+  .edit-unit {
+    width: 60px;
+  }
+
+  .item-form {
+    width: 90%; 
+    max-width: 500px;
+    font-size: 1.4em; 
+    text-align: center; 
+  }
+
+  .item-list-container {
+    width: 90%;
+    max-width: 600px;
+    text-align: center; 
+  }
+
+  #adds-item-btn {
+    width: calc(40% - 20px); 
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block; 
+  }
+
+  .burger {
+    display: block;
+  }
+
+  .container.sidebar-active {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 535px ) {
+  .design1 {
+    display: none;
+  }
+  .message-item {
+    text-align: center;
+    font-size: 2em;
+    position: absolute;
+    top: 40%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    padding: 10px;
+    z-index: 999;
+    font-weight: 600;
+  }
+
+  .edit-name {
+    padding-left: 5px;
+    max-width: 90px;
+    text-align: start;
+    height: 25px;
+
+  }
+
+  .edit-quantity, .edit-unit {
+    font-weight: 700;
+    max-width: 50px;
+    text-align: center;
+  }
+  .sidebar {
+    transform: translateX(-100%);
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 95%;
+    z-index: 1000;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #itemName,
+  #itemQuantity,
+  #itemUnit {
+    width: calc(100% - 20px); 
+    margin-bottom: 10px; 
+    border-radius: 10px;
+  }
+
+  .edit-unit {
+    width: 60px;
+    --webkit-appearance: none;
+  }
+
+  .item-form {
+    width: 90%; 
+    max-width: 500px;
+    font-size: 1.4em; 
+    text-align: center; 
+  }
+
+  .item-list-container {
+    width: 90%;
+    max-width: 330px;
+    text-align: center; 
+  }
+
+  #adds-item-btn {
+    width: calc(40% - 20px); 
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block; 
+  }
+
+  .burger {
+    display: block;
+  }
+
+  .container.sidebar-active {
+    margin-left: 0;
+  }
+}
+
+/*END FOR RESPONSIVENESS */

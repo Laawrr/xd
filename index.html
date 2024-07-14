@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon" href="img/logo.svg" type="image/x-icon" />
+  <title>Shopping List</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+  <div class="hamburger-menu">
+    <div class="burger">
+      <img src="img/listlogo.png" alt="Burger Icon" onclick="toggleSidebar()" />
+    </div>
+  </div>
+
+  <div class="message">
+    <p class="message-item">Please Select or Add a list.</p>
+  </div>
+
+  <div class="sidebar">
+    <div class="searchBar">
+      <div class="sidebar-title">
+        <div class="sidebar-burger">
+          <img src="img/listlogo.png" alt="Burger Icon" style="width: 25px; height: 25px" onclick="closeSidebar()" />
+        </div>
+        <h2>My List</h2>
+      </div>
+
+      <div class="input-container">
+        <input type="text" id="listTitle" class="input-field" placeholder="" />
+        <label for="inputField" class="input-label">Enter Shopping list Title</label>
+        <button onclick="addListTitle()" class="addTitle">Add</button>
+      </div>
+    </div>
+
+    <div id="titleListDiv">
+      <button class="deleteAllTitles" onclick="deleteAllTitles()">
+        <span class="deleteAllTitlesX" title="Delete All Titles">X</span>
+      </button>
+      <div class="title-list" id="titleList"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="top"></div>
+    <div class="item-form">
+      <h1 id="shoppingListTitle"></h1>
+      <input type="text" id="itemName" placeholder="Item Name" required />
+      <input type="number" id="itemQuantity" placeholder="Quantity" required min="1" />
+      <select id="itemUnit" required>
+        <option value="pc">pc</option>
+        <option value="kg">kg</option>
+        <option value="lbs">lbs</option>
+      </select>
+      <input class="add-item-btn" id="adds-item-btn" type="submit" value="Add Item" onclick="addItem()" />
+    </div>
+
+    <div class="item-filters">
+      <button onclick="filterItems('all')" class="active">All</button>
+      <button onclick="filterItems('incomplete')">Incomplete</button>
+      <button onclick="filterItems('complete')">Complete</button>
+      <select id="sortSelect" onchange="sortItems()">
+        <option value="select">Select</option>
+        <option value="asc">Sort A-Z</option>
+        <option value="desc">Sort Z-A</option>
+      </select>
+    </div>
+
+    <div class="item-list-container">
+      <img class="design1" src="/img/kitty.png" alt="" />
+      <ul class="item-list" id="itemList"></ul>
+      <button class="deleteAllItems" onclick="deleteAllItems()" title="Delete All Items">
+        <img src="img/remove.png" />
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
